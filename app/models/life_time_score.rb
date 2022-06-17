@@ -1,0 +1,2 @@
+class LifeTimeScore < ApplicationRecord
+end
