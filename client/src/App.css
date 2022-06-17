@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap');
 
 *{
-  font-family: 'Fascinate', cursive;
+  font-family: 'Kdam Thmor Pro', sans-serif;
   color: rgb(0, 236, 205);
 }
 
@@ -10,6 +10,7 @@
   margin-left: 46%;
   padding: 10px;
   color: rgb(0, 236, 205);
+  transition: 0.3s;
 }
 
 #login{
@@ -42,21 +43,144 @@ body {
 }
 
 .login{
-  margin: 5% 34%;
   height: fit-content;
-  width: 30%;
+  width: fit-content;
   position: absolute;
   background: rgba(250, 250, 250, 0.171);
   border-radius: 10%;
-  
+  right: 43%;
+  bottom: 50%
 }
 
 .login-form{
   padding: 15px;
   margin-left: 17%;
+}
+
+.register{
+  height: fit-content;
+  width: fit-content;
+  position: absolute;
+  background: rgba(250, 250, 250, 0.171);
+  border-radius: 10%;
+  right: 41.5%;
+  bottom: 50%
   
 }
 
-#password{
-  margin-top: 100px;
+.register-form{
+  padding: 15px;
+  margin-left: 17%;
+}
+
+.nav{
+  transition: all 0.3s;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.nav:hover {
+  background: rgba(250, 250, 250, 0.171);
+  color: purple;
+}
+
+.game-board{
+  position: absolute;
+  background: rgba(250, 250, 250, 0.171);
+  height: 80%;
+  width: 80%;
+  right: 10%;
+  border-radius: 20px;
+}
+
+.scores {
+  display: flex;
+}
+
+
+
+
+.key {
+  width: fit-content;
+  padding: 10px;
+  height: fit-content;
+  margin: 17px 1px;
+  float: left;
+  margin-left: 20px;
+  background: rgba(250, 250, 250, 0.171);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.top{
+  position: absolute;
+  width: fit-content;
+  display: flex;
+  right: 30%;
+  top: 60%
+}
+
+.mid{
+  position: absolute;
+  width: fit-content;
+  display: flex;
+  top: 70%;
+  right: 32.2%;
+}
+
+.bottom{
+  position: absolute;
+  width: fit-content;
+  display: flex;
+  top: 80%;
+  right: 35.2%;
+}
+
+.backspace {
+  position: absolute;
+  right: 25%;
+  top: 60%;
+}
+
+.key:hover {
+  color: rgb(240, 128, 255);
+  background-color: #001b92;
+}
+
+.word{
+  position: absolute;
+  right: 42%;
+}
+
+
+.word-keys{
+  width: fit-content;
+  padding: 10px;
+  height: fit-content;
+  margin: 17px 1px;
+  float: left;
+  margin-left: 20px;
+  background: rgba(250, 250, 250, 0.171);
+}
+
+.user-input{
+  position: absolute;
+  top: 45%;
+  right: 60%;
+}
+
+.user-input-keys{
+  width: fit-content;
+  padding: 10px;
+  height: fit-content;
+  margin: 17px 1px;
+  float: left;
+  margin-left: 20px;
+  background: rgba(250, 250, 250, 0.171);
+}
+
+.user-answer{
+  position: absolute;
+  top: 44%;
+  right: 42%;
 }
