@@ -10,69 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_17_171940) do
+ActiveRecord::Schema.define(version: 2022_06_18_131234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admins", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "password_digest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.boolean "is_admin"
-  end
+ 
 
-  create_table "appointments", force: :cascade do |t|
-    t.string "title"
-    t.string "notes"
-    t.string "startDate"
-    t.string "endDate"
-    t.integer "admin_id"
-    t.integer "patient_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "type_service"
-    t.string "time"
-    t.string "location_type"
-  end
-
-  create_table "assignments", force: :cascade do |t|
-    t.string "name"
-    t.datetime "due_date"
-    t.string "description"
-    t.integer "current_course_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "casefiles", force: :cascade do |t|
-    t.integer "patient_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "progress"
-    t.string "report_date"
-  end
-
+  
   create_table "life_time_scores", force: :cascade do |t|
     t.integer "score"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "patients", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "password_digest"
-    t.string "bio"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "date_of_birth"
-    t.string "full_name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -90,6 +40,7 @@ ActiveRecord::Schema.define(version: 2022_06_17_171940) do
     t.string "hint3"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "initial_hint"
   end
 
 end
