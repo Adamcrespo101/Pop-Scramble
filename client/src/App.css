@@ -166,7 +166,7 @@ body {
 .user-input{
   position: absolute;
   top: 45%;
-  right: 60%;
+  right: 66%;
 }
 
 .user-input-keys{
@@ -182,5 +182,12 @@ body {
 .user-answer{
   position: absolute;
   top: 44%;
-  right: 42%;
+  right: 35.5%;
+}
+
+.check-answer{
+  width: fit-content;
+  margin: 0;
+  position: absolute;
+  top: 80%;
 }

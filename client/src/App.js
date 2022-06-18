@@ -11,13 +11,16 @@ function App() {
 
   const [words, setWords] = useState([])
 
+
+  
+
     useEffect(() => {
       fetch('/words')
       .then(res => res.json())
       .then(data => setWords(data))
     },[])
 
-    console.log(words)
+    
 
   return (
     <div className="App">
