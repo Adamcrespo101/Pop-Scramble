@@ -24,6 +24,8 @@ function Play({words, setWords}){
         setInput(input + e.target.id)
     }
     console.log(random)
+    const letters = random?.answer?.split('')
+    console.log(letters)
     return(
         <div className="play">
             <h2 style={{marginLeft: "10%"}}>Welcome, User!</h2>
@@ -32,20 +34,18 @@ function Play({words, setWords}){
                     <h3 style={{marginLeft: "5%"}}>Lifetime Score:</h3>
                     <h3 style={{marginLeft: "5%"}}>Current Score:</h3>
                 </div>
-                <div className='check-answer'>
-                <form>
-                <input type="text" value={input}/>
-                <br></br>
-                <button type="submit" style={{border: 'none', background: "rgba(250, 250, 250, 0.171)", height: "50px", width: "200px"}}>Check your Answer!</button>
-                </form>
-                </div>
+                
                 <div className="word">
+                     
+                {letters?.map((letter) => {
+                    return(
+                        <h1 className="word-keys" key={letter.id}></h1>
+                    )
+                })}
                     
-                        <h1 className="word-keys">A</h1>
-                        <h1 className="word-keys">A</h1>
-                        <h1 className="word-keys">A</h1>
-                        <h1 className="word-keys">A</h1>
-                    
+                </div>
+                <div className='hint'>
+                    Hint: {random?.initial_hint}
                 </div>
                 <div className="user-answer">
                 <form>

@@ -10,8 +10,21 @@ import { useEffect, useState } from 'react'
 function App() {
 
   const [words, setWords] = useState([])
-
-
+  const [currentUser, setCurrentUser] = useState(null)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  useEffect(() => {
+    fetch('/me')
+    .then((res) => {
+      if (res.ok) {
+        res.json()
+        .then((user) => {
+          setIsAuthenticated(true);
+          setCurrentUser(user);
+          console.log(user)
+        });
+      }
+    });
+  }, []);
   
 
     useEffect(() => {

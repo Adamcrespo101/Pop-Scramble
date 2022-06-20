@@ -156,7 +156,7 @@ body {
 .word-keys{
   width: fit-content;
   padding: 10px;
-  height: fit-content;
+  height: 20px;
   margin: 17px 1px;
   float: left;
   margin-left: 20px;
@@ -190,4 +190,10 @@ body {
   margin: 0;
   position: absolute;
   top: 80%;
+}
+
+.hint{
+  position: absolute;
+  top: 30%;
+  right: 35%;
 }
