@@ -197,3 +197,13 @@ body {
   top: 30%;
   right: 35%;
 }
+
+.winner {
+  position: absolute;
+  right: 30%;
+}
+
+.sorry {
+  position: absolute;
+  right: 30%
+}

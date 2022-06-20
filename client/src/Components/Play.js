@@ -41,12 +41,14 @@ let navigate = useNavigate()
             setChances(chances => chances - 1)
             setInput('')
         } else {
-            fetch(`/users/${currentUser.id}`, {
+            fetch(`/scores/${currentUser.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(score)
+                body: JSON.stringify({
+                    score: currentUser.score += score
+                })
             })
             .then(res => res.json())
             .then(data => console.log(data))
@@ -61,7 +63,7 @@ let navigate = useNavigate()
             <h2 style={{marginLeft: "10%"}}>Welcome, {currentUser?.username}!</h2>
             <div className="game-board">
                 <div className="scores">
-                    <h3 style={{marginLeft: "5%"}}>Lifetime Score: {currentUser?.score > 0 ? currentUser?.score : 0}</h3>
+                    <h3 style={{marginLeft: "5%"}}>Lifetime Score: {currentUser?.score}</h3>
                     <h3 style={{marginLeft: "5%"}}>Chances: {chances}</h3>
                 </div>
                 
