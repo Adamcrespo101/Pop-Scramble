@@ -3,11 +3,9 @@ import { useState } from 'react'
 
 
 
-function Register(){
+function Register({username, setUsername, password, setPassword}){
     let navigate = useNavigate()
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-
+    
     function handleName(e){
         setUsername(e.target.value)
     }

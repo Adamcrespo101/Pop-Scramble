@@ -7,11 +7,16 @@ import Play from './Components/Play';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from 'react'
 
+
 function App() {
 
   const [words, setWords] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState('')
+  
   useEffect(() => {
     fetch('/me')
     .then((res) => {
@@ -38,11 +43,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Header />
+      <Header isAuthenticated={isAuthenticated} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated}/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login username={username} setUsername={setUsername} password={password} setPassword={setPassword} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} setErrors={setErrors}/>} />
+        <Route path="/register" element={<Register username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>} />
         <Route path="/play" element={<Play words={words} setWords={setWords}/>} />
       </Routes>
       </BrowserRouter>
