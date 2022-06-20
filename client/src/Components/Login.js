@@ -27,7 +27,7 @@ function Login ({username, setUsername, password, setPassword,setCurrentUser, se
             res.json().then((user) => {
                 setCurrentUser(user);
                 setIsAuthenticated(true)
-                navigate('/')
+                navigate('/play')
                 console.log(user)
             });
           } else {

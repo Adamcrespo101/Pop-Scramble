@@ -4,6 +4,8 @@ import Header from './Components/Header';
 import Home from './Components/Home'
 import Register from './Components/Register';
 import Play from './Components/Play';
+import YouLost from './Components/YouLost';
+import YouWin from './Components/YouWin';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from 'react'
 
@@ -48,7 +50,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login username={username} setUsername={setUsername} password={password} setPassword={setPassword} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} setErrors={setErrors}/>} />
         <Route path="/register" element={<Register username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>} />
-        <Route path="/play" element={<Play words={words} setWords={setWords}/>} />
+        <Route path="/play" element={<Play words={words} setWords={setWords} currentUser={currentUser}/>} />
+        <Route path="/YouLost" element={<YouLost />} />
+        <Route path="/YouWin" element={<YouWin />} />
       </Routes>
       </BrowserRouter>
 

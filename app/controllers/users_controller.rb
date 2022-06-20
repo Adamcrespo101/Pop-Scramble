@@ -28,6 +28,16 @@ class UsersController < ApplicationController
         end
     end
 
+    def update 
+        user = User.find_by(id: params[:id])
+        if user 
+            user.update(score: params[:score])
+            render json: user, status: :accepted
+        else
+            render json: {error: "user not found"}, status: 404
+        end
+    end
+
     def find  
         user = User.find_by(id: params[:id])
         if user
