@@ -6,6 +6,8 @@ import Register from './Components/Register';
 import Play from './Components/Play';
 import YouLost from './Components/YouLost';
 import YouWin from './Components/YouWin';
+import HowTo from './Components/HowTo';
+import Leaderboards from './Components/Leaderboards';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from 'react'
 
@@ -18,6 +20,7 @@ function App() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState('')
+  const [userRankings, setUserRankings] = useState('')
   
   useEffect(() => {
     fetch('/me')
@@ -40,6 +43,13 @@ function App() {
       .then(data => setWords(data))
     },[])
 
+    useEffect(() => {
+      fetch('/users')
+      .then(res => res.json())
+      .then(data => setUserRankings(data))
+      console.log(userRankings)
+    }, [])
+
     
 
   return (
@@ -53,6 +63,8 @@ function App() {
         <Route path="/play" element={<Play words={words} setWords={setWords} currentUser={currentUser}/>} />
         <Route path="/YouLost" element={<YouLost />} />
         <Route path="/YouWin" element={<YouWin />} />
+        <Route path="/leaderboards" element={<Leaderboards userRankings={userRankings}/>} />
+        <Route path="/how_to_play" element={<HowTo />} />
       </Routes>
       </BrowserRouter>
 

@@ -6,21 +6,31 @@ let navigate = useNavigate()
     const [input, setInput] = useState([])
     const [random, setRandom] = useState([])
     const [chances, setChances] = useState(3)
-    const randomWord = Math.floor(Math.random() * words.length)
+    const [streak, setStreak] = useState(0)
+    const [response, setResponse] = useState('')
+    const randomWord = Math.floor(Math.random() * words.length);
     
     useEffect(() => {
         fetch(`/words/${randomWord}`)
         .then(res => res.json())
         .then(data => setRandom(data))
     }, [])
-
+    console.log(random)
+    console.log(randomWord)
     useEffect(() => {
         if (chances === 0) {
             navigate('/YouLost')
         }
     }, [])
-    const [currentHint, setCurrentHint] = useState('')
 
+    useEffect(() => {
+  const timer = setTimeout(() => {
+    return setResponse('')
+  }, 3000);
+  return () => clearTimeout(timer);
+}, [submitAnswer]);
+
+    const [currentHint, setCurrentHint] = useState('')
     const keyBoardTop = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     const keyBoardMiddle = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
     const keyBoardBottom = ["Z", "X", "C", "V", "B", "N", "M"]
@@ -31,7 +41,7 @@ let navigate = useNavigate()
     function addUserInput(e){
         setInput(input + e.target.id)
     }
-    console.log(random)
+    
     const letters = random?.answer?.split('')
     
     function submitAnswer(e){
@@ -40,6 +50,8 @@ let navigate = useNavigate()
         if (input !== random?.answer){
             setChances(chances => chances - 1)
             setInput('')
+            setStreak(0)
+            setResponse("Incorrect answer try again!")
         } else {
             fetch(`/scores/${currentUser.id}`, {
                 method: "PATCH",
@@ -52,7 +64,11 @@ let navigate = useNavigate()
             })
             .then(res => res.json())
             .then(data => console.log(data))
-            navigate('/YouWin')
+            //navigate('/YouWin')
+            setStreak(streak => streak + 1)
+            setRandom(words[randomWord])
+            setInput('')
+            setResponse("That was the correct answer, well done!")
         }
     }
 
@@ -65,6 +81,7 @@ let navigate = useNavigate()
                 <div className="scores">
                     <h3 style={{marginLeft: "5%"}}>Lifetime Score: {currentUser?.score}</h3>
                     <h3 style={{marginLeft: "5%"}}>Chances: {chances}</h3>
+                    <h3 style={{marginLeft: "5%"}}>Streak: {streak}</h3>
                 </div>
                 
                 <div className="word">
@@ -78,6 +95,8 @@ let navigate = useNavigate()
                 </div>
                 <div className='hint'>
                     Hint: {chances === 3 ? random?.initial_hint : chances === 2 ? random?.hint1 : chances === 1 ? random?.hint2 : random?.hint3}
+                    <br></br>
+                    <p style={{color: "white"}}>{response}</p>
                 </div>
                 <div className="user-answer">
                 <form onSubmit={submitAnswer}>
