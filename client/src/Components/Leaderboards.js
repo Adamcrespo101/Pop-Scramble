@@ -19,8 +19,8 @@ function Leaderboards({userRankings}){
                         <li>
                         <div className="ranking-item">
 
-                        <h3>{ranking.username}</h3>
-                        <h3 style={{marginLeft: '160px'}}>{ranking.score}</h3>
+                        <h3>{ranking?.username}</h3>
+                        <h3 style={{marginLeft: '160px'}}>{ranking?.score}</h3>
                         
                         </div>
                         </li>

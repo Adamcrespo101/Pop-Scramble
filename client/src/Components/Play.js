@@ -8,16 +8,22 @@ let navigate = useNavigate()
     const [chances, setChances] = useState(3)
     const [streak, setStreak] = useState(0)
     const [response, setResponse] = useState('')
-    const [gameClock, setGameClock] = useState(30)
-    const randomWord = Math.floor(Math.random() * words.length);
+    const [gameClock, setGameClock] = useState(60)
+    // const randomWord = words[Math.floor(Math.random() * words.length)];
     
+    // useEffect(() => {
+    //     fetch(`/words/${randomWord}`)
+    //     .then(res => res.json())
+    //     .then(data => setRandom(data))
+    // }, [])
+    
+    
+       
     useEffect(() => {
-        fetch(`/words/${randomWord}`)
-        .then(res => res.json())
-        .then(data => setRandom(data))
-    }, [])
+        setRandom(words[Math.floor(Math.random() * words.length)])
+    }, [streak])
+
     console.log(random)
-    console.log(randomWord)
 
     useEffect(() => {
         const gameTimer = setTimeout(() => {
@@ -25,7 +31,7 @@ let navigate = useNavigate()
                 setGameClock(gameClock => gameClock - 1)
             } else if (gameClock === 0 && chances > 0){
                 setChances(chances => chances - 1)
-                setGameClock(30)
+                setGameClock(60)
             } else if (chances === 0) {
                 navigate('/YouLost')
             }
@@ -34,11 +40,7 @@ let navigate = useNavigate()
         return () => clearTimeout(gameTimer)
     }, )
 
-    // useEffect(() => {
-    //     if (chances === 0) {
-    //         navigate('/YouLost')
-    //     }
-    // }, [gameTimer])
+    
 
     useEffect(() => {
   const timer = setTimeout(() => {
@@ -48,7 +50,7 @@ let navigate = useNavigate()
 }, [submitAnswer]);
 
 
-console.log(gameClock)
+
 
     const [currentHint, setCurrentHint] = useState('')
     const keyBoardTop = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
@@ -62,36 +64,10 @@ console.log(gameClock)
         setInput(input + e.target.id)
     }
     
-    const letters = random?.answer?.split('')
-    let size = letters?.length
-    for(var i = size - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var tmp = letters[i];
-        letters[i] = letters[j];
-        letters[j] = tmp;
-    }
-    
-
-    String.prototype.shuffle = function () {
-        var a = this.split(""),
-            n = a.length;
-    
-        for(var i = n - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var tmp = a[i];
-            a[i] = a[j];
-            a[j] = tmp;
-        }
-        return a.join("");
-    }
-      
-    let scrambled = random?.answer?.shuffle();
-    const scrambledLetters = scrambled?.split('')
-      
     
     function submitAnswer(e){
         e.preventDefault()
-        let score = chances === 3 ? 1000 : chances === 2 ? 750 : chances === 1 ? 500 : chances > 0 ? 250 : navigate('/YouLost') 
+        let score = gameClock > 45 && chances === 3 ? 1000 : gameClock > 30 && chances > 1 ? 750 : gameClock > 15 && chances > 0 ? 500 : gameClock > 0 && chances === 0 ? 250 : navigate('/YouLost') 
         if (input !== random?.answer){
             setChances(chances => chances - 1)
             setInput('')
@@ -111,15 +87,14 @@ console.log(gameClock)
             .then(data => console.log(data))
             //navigate('/YouWin')
             setStreak(streak => streak + 1)
-            setRandom(words[randomWord])
+            setRandom(prev => !prev)
             setInput('')
             setResponse("That was the correct answer, well done!")
-            setGameClock(30)
+            setGameClock(60)
         }
     }
 
-    console.log(currentHint)
-
+    
     return(
         <div className="play">
             <h2 style={{marginLeft: "10%"}}>Welcome, {currentUser?.username}!</h2>
@@ -133,7 +108,7 @@ console.log(gameClock)
                 
                 <div className="word">
                      
-                {scrambledLetters?.map((letter) => {
+                {random?.scrambled?.split('').map((letter) => {
                     return(
                         <h2 className="word-keys" key={letter.id}>{letter}</h2>
                     )
