@@ -8,6 +8,7 @@ let navigate = useNavigate()
     const [chances, setChances] = useState(3)
     const [streak, setStreak] = useState(0)
     const [response, setResponse] = useState('')
+    const [gameClock, setGameClock] = useState(30)
     const randomWord = Math.floor(Math.random() * words.length);
     
     useEffect(() => {
@@ -17,11 +18,27 @@ let navigate = useNavigate()
     }, [])
     console.log(random)
     console.log(randomWord)
+
     useEffect(() => {
-        if (chances === 0) {
-            navigate('/YouLost')
-        }
-    }, [])
+        const gameTimer = setTimeout(() => {
+            if (gameClock > 0 ){
+                setGameClock(gameClock => gameClock - 1)
+            } else if (gameClock === 0 && chances > 0){
+                setChances(chances => chances - 1)
+                setGameClock(30)
+            } else if (chances === 0) {
+                navigate('/YouLost')
+            }
+           
+        }, 1000)
+        return () => clearTimeout(gameTimer)
+    }, )
+
+    // useEffect(() => {
+    //     if (chances === 0) {
+    //         navigate('/YouLost')
+    //     }
+    // }, [gameTimer])
 
     useEffect(() => {
   const timer = setTimeout(() => {
@@ -29,6 +46,9 @@ let navigate = useNavigate()
   }, 3000);
   return () => clearTimeout(timer);
 }, [submitAnswer]);
+
+
+console.log(gameClock)
 
     const [currentHint, setCurrentHint] = useState('')
     const keyBoardTop = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
@@ -43,6 +63,31 @@ let navigate = useNavigate()
     }
     
     const letters = random?.answer?.split('')
+    let size = letters?.length
+    for(var i = size - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = letters[i];
+        letters[i] = letters[j];
+        letters[j] = tmp;
+    }
+    
+
+    String.prototype.shuffle = function () {
+        var a = this.split(""),
+            n = a.length;
+    
+        for(var i = n - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+        }
+        return a.join("");
+    }
+      
+    let scrambled = random?.answer?.shuffle();
+    const scrambledLetters = scrambled?.split('')
+      
     
     function submitAnswer(e){
         e.preventDefault()
@@ -69,6 +114,7 @@ let navigate = useNavigate()
             setRandom(words[randomWord])
             setInput('')
             setResponse("That was the correct answer, well done!")
+            setGameClock(30)
         }
     }
 
@@ -82,13 +128,14 @@ let navigate = useNavigate()
                     <h3 style={{marginLeft: "5%"}}>Lifetime Score: {currentUser?.score}</h3>
                     <h3 style={{marginLeft: "5%"}}>Chances: {chances}</h3>
                     <h3 style={{marginLeft: "5%"}}>Streak: {streak}</h3>
+                    <h3 style={{marginLeft: "5%"}}>Time Remaining: {gameClock}</h3>
                 </div>
                 
                 <div className="word">
                      
-                {letters?.map((letter) => {
+                {scrambledLetters?.map((letter) => {
                     return(
-                        <h1 className="word-keys" key={letter.id}></h1>
+                        <h2 className="word-keys" key={letter.id}>{letter}</h2>
                     )
                 })}
                     
