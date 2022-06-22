@@ -20,7 +20,7 @@ function App() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState('')
-  const [userRankings, setUserRankings] = useState('')
+  const [userRankings, setUserRankings] = useState([])
   
   useEffect(() => {
     fetch('/me')
