@@ -4,6 +4,9 @@ import { useState } from 'react'
 
 
 function Register({username, setUsername, password, setPassword}){
+
+  const [errors, setErrors] = useState([])
+
     let navigate = useNavigate()
     
     function handleName(e){
@@ -38,7 +41,7 @@ function Register({username, setUsername, password, setPassword}){
               });
             } else {
               res.json().then((errors) => {
-                console.error(errors);
+                setErrors(errors);
               });
             }
           });
@@ -47,6 +50,7 @@ function Register({username, setUsername, password, setPassword}){
     console.log(password)
 
     return(
+        <>
         <div className="register">
             <form className="register-form" onSubmit={register}>
                 <h2>Sign Up</h2>
@@ -63,6 +67,10 @@ function Register({username, setUsername, password, setPassword}){
                 <br></br>
            </form>
         </div>
+        <>
+           <p className='errors'>{errors.exception.slice(50, errors.exception.length - 1)}</p>
+        </>
+        </>
     )
 }
 

@@ -229,3 +229,10 @@ body {
 .rankings-header {
   text-align: center;
 }
+
+.errors {
+  width: 30%;
+  position: absolute;
+  top: 55%;
+  right: 36%;
+}
