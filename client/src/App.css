@@ -11,7 +11,7 @@
   padding: 10px;
   color: rgb(0, 236, 205);
   transition: 0.3s;
-  width: 40%;
+  width: fit-content;
 }
 
 #login{

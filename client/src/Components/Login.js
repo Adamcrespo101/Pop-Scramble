@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
-function Login ({username, setUsername, password, setPassword,setCurrentUser, setIsAuthenticated, setErrors}){
+function Login ({username, setUsername, password, setPassword,setCurrentUser, setIsAuthenticated, setErrors, errors}){
+  
  let navigate = useNavigate()
     function handleUsername(e){
         setUsername(e.target.value)
@@ -23,7 +24,7 @@ function Login ({username, setUsername, password, setPassword,setCurrentUser, se
           },
           body: JSON.stringify(user),
         }).then((res) => {
-          if (res.ok) {
+          if (user?.chances) {
             res.json().then((user) => {
                 setCurrentUser(user);
                 setIsAuthenticated(true)
@@ -32,13 +33,18 @@ function Login ({username, setUsername, password, setPassword,setCurrentUser, se
             });
           } else {
             res.json().then((errors) => {
-              setErrors(errors);
+              console.log(errors)
+              setErrors("Invalid Username or Password");
+                  setCurrentUser(null);
+                  setIsAuthenticated(false)
+                  navigate('/login')
             });
           }
         });
       };
 
     return(
+      <>
         <div>
             <h1 style={{textAlign: 'center'}}>Welcome to Pop Word!</h1>
         <div className="login">
@@ -55,6 +61,10 @@ function Login ({username, setUsername, password, setPassword,setCurrentUser, se
            </form>
         </div>
         </div>
+        <>
+        <p className='errors'>{errors}</p>
+        </>
+      </>
     )
 }
 

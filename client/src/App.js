@@ -52,7 +52,7 @@ function App() {
       <Header isAuthenticated={isAuthenticated} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated}/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login username={username} setUsername={setUsername} password={password} setPassword={setPassword} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} setErrors={setErrors}/>} />
+        <Route path="/login" element={<Login errors={errors} username={username} setUsername={setUsername} password={password} setPassword={setPassword} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} setErrors={setErrors}/>} />
         <Route path="/register" element={<Register username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>} />
         <Route path="/play" element={<Play  currentUser={currentUser} music={music}/>} />
         <Route path="/YouLost" element={<YouLost />} />
