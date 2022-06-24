@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react'
 
 function App() {
 
-  const [words, setWords] = useState([])
+  // const [words, setWords] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [username, setUsername] = useState('')
@@ -37,11 +37,11 @@ function App() {
   }, []);
   
 
-    useEffect(() => {
-      fetch('/words')
-      .then(res => res.json())
-      .then(data => setWords(data))
-    },[])
+    // useEffect(() => {
+    //   fetch('/words')
+    //   .then(res => res.json())
+    //   .then(data => setWords(data))
+    // },[])
 
     useEffect(() => {
       fetch('/users')
@@ -60,7 +60,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login username={username} setUsername={setUsername} password={password} setPassword={setPassword} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} setErrors={setErrors}/>} />
         <Route path="/register" element={<Register username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>} />
-        <Route path="/play" element={<Play words={words} setWords={setWords} currentUser={currentUser}/>} />
+        <Route path="/play" element={<Play  currentUser={currentUser}/>} />
         <Route path="/YouLost" element={<YouLost />} />
         <Route path="/YouWin" element={<YouWin />} />
         <Route path="/leaderboards" element={<Leaderboards userRankings={userRankings}/>} />

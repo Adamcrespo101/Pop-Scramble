@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Play({words, setWords, currentUser}){
+function Play({currentUser}){
 let navigate = useNavigate()
     const [input, setInput] = useState([])
-    const [random, setRandom] = useState([])
+    const [words, setWords] = useState([])
+   const [random, setRandom] = useState({})
     const [chances, setChances] = useState(3)
     const [streak, setStreak] = useState(0)
     const [response, setResponse] = useState('')
@@ -16,14 +17,18 @@ let navigate = useNavigate()
     //     .then(res => res.json())
     //     .then(data => setRandom(data))
     // }, [])
+    useEffect(() => {
+        fetch('/words')
+        .then(res => res.json())
+        .then(data => setWords(data))
+      },[])
     
-    
-       
+       console.log(words)
     useEffect(() => {
         setRandom(words[Math.floor(Math.random() * words.length)])
-    }, [streak])
+    }, [words])
 
-    console.log(random)
+    
 
     useEffect(() => {
         const gameTimer = setTimeout(() => {
@@ -32,7 +37,7 @@ let navigate = useNavigate()
             } else if (gameClock === 0 && chances > 0){
                 setChances(chances => chances - 1)
                 setGameClock(60)
-            } else if (chances === 0) {
+            } else if (chances == 0 && gameClock === 0) {
                 navigate('/YouLost')
             }
            
@@ -40,7 +45,6 @@ let navigate = useNavigate()
         return () => clearTimeout(gameTimer)
     }, )
 
-    
 
     useEffect(() => {
   const timer = setTimeout(() => {
@@ -52,7 +56,7 @@ let navigate = useNavigate()
 
 
 
-    const [currentHint, setCurrentHint] = useState('')
+    
     const keyBoardTop = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     const keyBoardMiddle = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
     const keyBoardBottom = ["Z", "X", "C", "V", "B", "N", "M"]
@@ -73,6 +77,8 @@ let navigate = useNavigate()
             setInput('')
             setStreak(0)
             setResponse("Incorrect answer try again!")
+        } else if(chances < 0){
+            navigate('/YouLost')
         } else {
             fetch(`/scores/${currentUser.id}`, {
                 method: "PATCH",
@@ -84,10 +90,9 @@ let navigate = useNavigate()
                 })
             })
             .then(res => res.json())
-            .then(data => console.log(data))
-            //navigate('/YouWin')
+            .then(data => console.log('nice'))
             setStreak(streak => streak + 1)
-            setRandom(prev => !prev)
+            setRandom(words[Math.floor(Math.random() * words.length)])
             setInput('')
             setResponse("That was the correct answer, well done!")
             setGameClock(60)
