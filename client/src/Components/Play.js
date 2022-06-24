@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Play({currentUser}){
+
+function Play({currentUser, music}){
 let navigate = useNavigate()
     const [input, setInput] = useState([])
     const [words, setWords] = useState([])
@@ -10,13 +11,8 @@ let navigate = useNavigate()
     const [streak, setStreak] = useState(0)
     const [response, setResponse] = useState('')
     const [gameClock, setGameClock] = useState(60)
-    // const randomWord = words[Math.floor(Math.random() * words.length)];
-    
-    // useEffect(() => {
-    //     fetch(`/words/${randomWord}`)
-    //     .then(res => res.json())
-    //     .then(data => setRandom(data))
-    // }, [])
+    const [audio] = useState(new Audio(music));
+    const [playing, setPlaying] = useState(false);
     useEffect(() => {
         fetch('/words')
         .then(res => res.json())
@@ -28,7 +24,9 @@ let navigate = useNavigate()
         setRandom(words[Math.floor(Math.random() * words.length)])
     }, [words])
 
-    
+    useEffect(() => {
+        playing ? audio.play() : audio.pause()
+      }, [playing])
 
     useEffect(() => {
         const gameTimer = setTimeout(() => {
@@ -54,7 +52,11 @@ let navigate = useNavigate()
 }, [submitAnswer]);
 
 
-
+    useEffect(() => {
+        if (chances < 0){
+            navigate('/YouLost')
+        }
+    }, [chances])
 
     
     const keyBoardTop = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
@@ -86,7 +88,8 @@ let navigate = useNavigate()
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    score: currentUser.score += score
+                    score: currentUser.score += score,
+                    streak: streak > currentUser.streak ? streak : currentUser.streak
                 })
             })
             .then(res => res.json())
@@ -108,6 +111,7 @@ let navigate = useNavigate()
                     <h3 style={{marginLeft: "5%"}}>Lifetime Score: {currentUser?.score}</h3>
                     <h3 style={{marginLeft: "5%"}}>Chances: {chances}</h3>
                     <h3 style={{marginLeft: "5%"}}>Streak: {streak}</h3>
+                    <h3 style={{marginLeft: "5%"}}>Longest Streak: {currentUser?.streak}</h3>
                     <h3 style={{marginLeft: "5%"}}>Time Remaining: {gameClock}</h3>
                 </div>
                 

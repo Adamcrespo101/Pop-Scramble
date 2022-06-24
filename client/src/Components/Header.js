@@ -29,7 +29,7 @@ let navigate = useNavigate()
             }
             <a href="/play" style={{color: 'rgb(0, 236, 205)', marginLeft: "20%"}} className="nav" >{isAuthenticated ? "Play" : null }</a>
             <a href="/leaderboards" style={{color: 'rgb(0, 236, 205)'}} id="login" className="nav">Leaderboards</a> 
-            <a href="/how_to_play" style={{color: 'rgb(0, 236, 205)'}} id="login" className="nav">How to play</a> 
+           
         </div>
             
         

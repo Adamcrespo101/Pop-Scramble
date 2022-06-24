@@ -10,7 +10,7 @@ import HowTo from './Components/HowTo';
 import Leaderboards from './Components/Leaderboards';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from 'react'
-
+import music from './audio/lofi-study-112191.mp3'
 
 function App() {
 
@@ -22,6 +22,7 @@ function App() {
   const [errors, setErrors] = useState('')
   const [userRankings, setUserRankings] = useState([])
   
+
   useEffect(() => {
     fetch('/me')
     .then((res) => {
@@ -36,13 +37,6 @@ function App() {
     });
   }, []);
   
-
-    // useEffect(() => {
-    //   fetch('/words')
-    //   .then(res => res.json())
-    //   .then(data => setWords(data))
-    // },[])
-
     useEffect(() => {
       fetch('/users')
       .then(res => res.json())
@@ -50,7 +44,7 @@ function App() {
       console.log(userRankings)
     }, [])
 
-    
+   
 
   return (
     <div className="App">
@@ -60,7 +54,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login username={username} setUsername={setUsername} password={password} setPassword={setPassword} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} setErrors={setErrors}/>} />
         <Route path="/register" element={<Register username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>} />
-        <Route path="/play" element={<Play  currentUser={currentUser}/>} />
+        <Route path="/play" element={<Play  currentUser={currentUser} music={music}/>} />
         <Route path="/YouLost" element={<YouLost />} />
         <Route path="/YouWin" element={<YouWin />} />
         <Route path="/leaderboards" element={<Leaderboards userRankings={userRankings}/>} />
