@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
     def index 
-        render json: User.all, status: :ok
+        render json: User.all.order(:score).reverse, status: :ok
     end
 
     def create 
