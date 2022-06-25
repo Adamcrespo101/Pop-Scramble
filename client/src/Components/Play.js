@@ -6,7 +6,7 @@ function Play({currentUser, music}){
 let navigate = useNavigate()
     const [input, setInput] = useState([])
     const [words, setWords] = useState([])
-   const [random, setRandom] = useState({})
+   const [random, setRandom] = useState([])
     const [chances, setChances] = useState(3)
     const [streak, setStreak] = useState(0)
     const [response, setResponse] = useState('')
@@ -58,6 +58,7 @@ let navigate = useNavigate()
         }
     }, [chances])
 
+
     
     const keyBoardTop = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     const keyBoardMiddle = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
@@ -93,9 +94,12 @@ let navigate = useNavigate()
                 })
             })
             .then(res => res.json())
-            .then(data => console.log('nice'))
+            .then(data => {
+                const unusedWords = words?.filter(data => data.answer !== input)
+                setRandom(unusedWords[Math.floor(Math.random() * unusedWords.length)])
+            })
             setStreak(streak => streak + 1)
-            setRandom(words[Math.floor(Math.random() * words.length)])
+            //setRandom(words[Math.floor(Math.random() * words.length)])
             setInput('')
             setResponse("That was the correct answer, well done!")
             setGameClock(60)
