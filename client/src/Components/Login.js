@@ -1,8 +1,16 @@
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 function Login ({username, setUsername, password, setPassword,setCurrentUser, setIsAuthenticated, setErrors, errors}){
   
+  const [loginData, setLoginData] = useState({
+    username: '',
+    password: ''
+  })
+  
+
  let navigate = useNavigate()
+
     function handleUsername(e){
         setUsername(e.target.value)
     }
@@ -13,7 +21,7 @@ function Login ({username, setUsername, password, setPassword,setCurrentUser, se
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const user = {
+        const player = {
             username: username,
             password: password
         }
@@ -22,24 +30,22 @@ function Login ({username, setUsername, password, setPassword,setCurrentUser, se
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(user),
+          body: JSON.stringify(player),
         }).then((res) => {
-          if (user?.chances) {
-            res.json().then((user) => {
+          res.json().then((user) => {
+              if (user.chances === 3) {
                 setCurrentUser(user);
                 setIsAuthenticated(true)
                 navigate('/play')
                 console.log(user)
-            });
-          } else {
-            res.json().then((errors) => {
-              console.log(errors)
-              setErrors("Invalid Username or Password");
+              } else {
+                  console.log(errors)
+                  setErrors("Invalid Username or Password");
                   setCurrentUser(null);
                   setIsAuthenticated(false)
                   navigate('/login')
+              }
             });
-          }
         });
       };
 
