@@ -111,7 +111,7 @@ let navigate = useNavigate()
                     <h3 style={{marginLeft: "5%"}}>Lifetime Score: {currentUser?.score}</h3>
                     <h3 style={{marginLeft: "5%"}}>Chances: {chances}</h3>
                     <h3 style={{marginLeft: "5%"}}>Streak: {streak}</h3>
-                    <h3 style={{marginLeft: "5%"}}>Longest Streak: {currentUser?.streak}</h3>
+                    <h3 style={{marginLeft: "5%"}}>Longest Streak: {currentUser?.streak > streak ? currentUser.streak : streak}</h3>
                     <h3 style={{marginLeft: "5%"}}>Time Remaining: {gameClock}</h3>
                 </div>
                 

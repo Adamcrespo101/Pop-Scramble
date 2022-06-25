@@ -27,7 +27,7 @@ let navigate = useNavigate()
             <a href="/login" style={{color: 'rgb(0, 236, 205)'}} id="login" className="nav" onClick={handleLogout}>Logout</a>
 
             }
-            <a href="/play" style={isAuthenticated ? {color: 'rgb(0, 236, 205)', marginLeft: "20%"} : {visibility: 'hidden'}} className="nav" >Play</a>
+            <a href="/play" style={isAuthenticated ? {color: 'rgb(0, 236, 205)', marginLeft: "20%"} : {visibility: 'hidden'}} className="nav" id="play">Play</a>
             <a href="/leaderboards" style={{color: 'rgb(0, 236, 205)'}} className="nav">Leaderboards</a> 
         </div>
             

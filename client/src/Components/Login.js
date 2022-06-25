@@ -68,7 +68,7 @@ function Login ({username, setUsername, password, setPassword,setCurrentUser, se
         </div>
         </div>
         <>
-        <p className='errors'>{errors}</p>
+        <p className='login-errors'>{errors}</p>
         </>
       </>
     )

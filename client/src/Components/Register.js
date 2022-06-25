@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-
+import { profanity } from '@2toad/profanity'
 
 
 function Register({username, setUsername, password, setPassword}){
@@ -68,7 +68,7 @@ function Register({username, setUsername, password, setPassword}){
            </form>
         </div>
         <>
-           <p className='errors'>{errors.exception.slice(50, errors.exception.length - 1)}</p>
+           <p className='errors'>{errors?.exception?.slice(50, errors?.exception?.length - 1)}</p>
         </>
         </>
     )

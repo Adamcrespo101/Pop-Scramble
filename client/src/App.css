@@ -23,7 +23,7 @@
 }
 
 body {
-  background: linear-gradient(-45deg, #001b92, #b500e2, #a700a7, #009c78);
+  background: linear-gradient(-45deg, #001b92, #b500e2, #a7002a, #009c78);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   height: 100vh;
@@ -235,4 +235,14 @@ body {
   position: absolute;
   top: 55%;
   right: 36%;
+}
+
+.login-errors{
+  position: absolute;
+  top: 52%;
+  right: 45.5%;
+}
+
+#play {
+  margin-right: 30px;
 }
