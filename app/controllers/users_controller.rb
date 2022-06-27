@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     def update 
         user = User.find_by(id: params[:id])
         if user 
-            user.update(score: params[:score])
+            user.update!(score: params[:score], streak: params[:streak])
             render json: user, status: :accepted
         else
             render json: {error: "user not found"}, status: 404
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     private 
 
     def user_params
-        params.permit(:username, :password, :chances)
+        params.permit(:username, :password, :chances, :score, :streak)
     end
 
 end

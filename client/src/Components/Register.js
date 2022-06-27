@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { profanity } from '@2toad/profanity'
+
 
 
 function Register({username, setUsername, password, setPassword}){
@@ -23,7 +23,9 @@ function Register({username, setUsername, password, setPassword}){
         let user = {
             username: username,
             password: password,
-            chances: 3
+            chances: 3,
+            score: 0,
+            streak: 0
         }
         fetch('/users', {
             method: "POST",
@@ -35,7 +37,7 @@ function Register({username, setUsername, password, setPassword}){
         .then((res) => {
             if (res.ok) {
               res.json().then((user) => {
-                console.log(user)
+                
                // setCurrentUser(user);
                 navigate('/login')
               });
@@ -46,8 +48,7 @@ function Register({username, setUsername, password, setPassword}){
             }
           });
     }
-    console.log(username)
-    console.log(password)
+  
 
     return(
         <>

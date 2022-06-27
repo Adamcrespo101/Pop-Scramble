@@ -1,10 +1,10 @@
 puts "Adding words to the game!"
 
-Word.create(scrambled: "IELRNG", answer: "LINGER", hint1: "Another word for stay", hint2: "Another word for lag", hint2: "Another word for loiter", hint3: "Word meaning stay put", initial_hint: "why are ya just standing there like that?")
-Word.create(scrambled: "TSROYRFE",answer: "FORESTRY", hint1: "another word for woodcraft", hint2: "Arboriculture is a synonym", hint3: "hmm.... think trees maybe", initial_hint: "something quite.... naturey")
-Word.create(scrambled: "DCIIRTNMIINSAO",answer: "DISCRIMINATION", hint1: "this is done towards groups of people", hint2: "There are better synonyms but lets go with - differential", hint3: "partisan is a related word", initial_hint: "if you take part in this your no bueno 😬")
-Word.create(scrambled: "ILMRPACIE",answer: "EMPIRICAL", hint1: "think pragmatic", hint2: "Ok that didn't work... maybe try thinking about similar words to speculative.", hint3: "tried and true...", initial_hint: "I'd like to think scientists probably say this word a bunch")
-Word.create(scrambled: "TSNAIDAIMRNITO",answer: "ADMINISTRATION", hint1: "they manage or make decisions", hint2: "think leadership", hint3: "Think government, I don't know what else to tell you.", initial_hint: "usually if your in one of these your probably pretty important")
+Word.create(scrambled: "IELRNG", answer: "LINGER", hint1: "stay...", hint2: "lag...", hint2: "loiter...", hint3: "stay put...", initial_hint: "dawdle...")
+Word.create(scrambled: "TSROYRFE",answer: "FORESTRY", hint1: "woodcraft...", hint2: "Arboriculture...", hint3: "trees...", initial_hint: "nature...")
+Word.create(scrambled: "DCIIRTNMIINSAO",answer: "DISCRIMINATION", hint1: "hatred...", hint2: "differential...", hint3: "bigotry...", initial_hint: "partisan...")
+Word.create(scrambled: "ILMRPACIE",answer: "EMPIRICAL", hint1: "pragmatic...", hint2: "speculative...", hint3: "tried and true...", initial_hint: "I'd like to think scientists probably say this word a bunch")
+Word.create(scrambled: "TSNAIDAIMRNITO",answer: "ADMINISTRATION", hint1: "they manage or make decisions", hint2: "think leadership", hint3: "Think government, I don't know what else to tell you.", initial_hint: "authority...")
 Word.create(scrambled: "SPAEEl",answer: "ELAPSE", hint1: "slide by", hint2: "go by", hint3: "pass by", initial_hint: "move past")
 Word.create(scrambled: "ONSERSPPKESO",answer: "SPOKESPERSON", hint1: "voice", hint2: "herald", hint3: "mouthpiece...", initial_hint: "Flo from progressive, the Keebler Elf, Siri?")
 Word.create(scrambled: "OVIAEORTPEC",answer: "COOPERATIVE", hint1: "communal", hint2: "amenable", hint3: "teamwork", initial_hint: "synergetic ...")

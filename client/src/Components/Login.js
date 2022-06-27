@@ -1,12 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+
 
 function Login ({username, setUsername, password, setPassword,setCurrentUser, setIsAuthenticated, setErrors, errors}){
   
-  const [loginData, setLoginData] = useState({
-    username: '',
-    password: ''
-  })
+
   
 
  let navigate = useNavigate()

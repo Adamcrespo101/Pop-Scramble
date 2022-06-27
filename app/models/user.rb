@@ -4,11 +4,11 @@ class User < ApplicationRecord
 
     validates :username, presence: true
     validates :username, uniqueness: true 
-    validates :username, length: { in: 8..20 }
+    validates :username, length: { in: 4..20 }
     validate :nono_words
     
-    validates :password, presence: true
-    validates :password, length: { in: 8..20 }
+    
+    
 
 
     def nono_words

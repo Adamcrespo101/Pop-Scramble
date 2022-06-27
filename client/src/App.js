@@ -20,7 +20,7 @@ function App() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState('')
-  const [userRankings, setUserRankings] = useState([])
+  const [random, setRandom] = useState([])
   
 
   useEffect(() => {
@@ -31,18 +31,13 @@ function App() {
         .then((user) => {
           setIsAuthenticated(true);
           setCurrentUser(user);
-          console.log(user)
+          
         });
       }
     });
   }, []);
   
-    useEffect(() => {
-      fetch('/users')
-      .then(res => res.json())
-      .then(data => setUserRankings(data))
-      console.log(userRankings)
-    }, [])
+   
 
    
 
@@ -54,10 +49,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login errors={errors} username={username} setUsername={setUsername} password={password} setPassword={setPassword} setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} setErrors={setErrors}/>} />
         <Route path="/register" element={<Register username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>} />
-        <Route path="/play" element={<Play  currentUser={currentUser} music={music}/>} />
+        <Route path="/play" element={<Play  currentUser={currentUser} music={music} random={random} setRandom={setRandom}/>} />
         <Route path="/YouLost" element={<YouLost />} />
         <Route path="/YouWin" element={<YouWin />} />
-        <Route path="/leaderboards" element={<Leaderboards userRankings={userRankings}/>} />
+        <Route path="/leaderboards" element={<Leaderboards currentUser={currentUser}/>} />
         <Route path="/how_to_play" element={<HowTo />} />
       </Routes>
       </BrowserRouter>

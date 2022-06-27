@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react'
 
-function Leaderboards({userRankings}){
-
-
+function Leaderboards({currentUser}){
+    const [userRankings, setUserRankings] = useState([])
+    useEffect(() => {
+        fetch('/users')
+        .then(res => res.json())
+        .then(data => setUserRankings(data))
+       
+      }, [currentUser])
   
     return(
         <div className="leaderboards">
@@ -15,8 +20,8 @@ function Leaderboards({userRankings}){
                     <div className="ranking-item">
                         
                             <ul>
-                                <h3>{ranking?.username}</h3>
-                                 <h3>Total points: {ranking?.score}</h3>
+                                <h3>{ranking.username}</h3>
+                                 <h3>Total points: {ranking.score}</h3>
                             </ul>
                         
                     </div>
